@@ -6,6 +6,11 @@ use Psr\Http\Message\ResponseInterface;
 
 interface EmitterInterface {
 
+	/**
+	 * @param \Psr\Http\Message\ResponseInterface $Response
+	 *
+	 * @return void
+	 */
 	public function emit(ResponseInterface $Response): void;
 
 }

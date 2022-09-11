@@ -9,6 +9,9 @@ class OutputEmitter extends AbstractConstructOnce implements EmitterInterface {
 
 	private OutputInterface $Output;
 
+	/**
+	 * @param \Laz0r\Emitter\OutputInterface $Output
+	 */
 	public function __construct(OutputInterface $Output) {
 		parent::__construct();
 
@@ -20,7 +23,7 @@ class OutputEmitter extends AbstractConstructOnce implements EmitterInterface {
 		$this->getOutput()->outputStatus(
 			$Response->getProtocolVersion(),
 			$Response->getStatusCode(),
-			$Response->getReasonPhrase()
+			$Response->getReasonPhrase(),
 		);
 
 		if ($this->isContentStatus($Response->getStatusCode())) {
@@ -28,10 +31,18 @@ class OutputEmitter extends AbstractConstructOnce implements EmitterInterface {
 		}
 	}
 
+	/**
+	 * @return \Laz0r\Emitter\OutputInterface
+	 */
 	public function getOutput(): OutputInterface {
 		return $this->Output;
 	}
 
+	/**
+	 * @param int $code
+	 *
+	 * @return bool
+	 */
 	protected function isContentStatus(int $code): bool {
 		return !in_array($code, [204, 205, 304]);
 	}

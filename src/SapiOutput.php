@@ -12,12 +12,18 @@ class SapiOutput extends AbstractConstructOnce implements OutputInterface {
 
 	private SapiInterface $Sapi;
 
+	/**
+	 * @param \Laz0r\Emitter\SapiInterface $Sapi
+	 */
 	public function __construct(SapiInterface $Sapi) {
 		parent::__construct();
 
 		$this->Sapi = $Sapi;
 	}
 
+	/**
+	 * @return \Laz0r\Emitter\SapiInterface
+	 */
 	public function getSapi(): SapiInterface {
 		return $this->Sapi;
 	}
@@ -49,7 +55,7 @@ class SapiOutput extends AbstractConstructOnce implements OutputInterface {
 		$this->getSapi()->header(
 			rtrim(sprintf("HTTP/%s %d %s", $version, $code, $reason)),
 			true,
-			$code
+			$code,
 		);
 	}
 
@@ -63,6 +69,11 @@ class SapiOutput extends AbstractConstructOnce implements OutputInterface {
 		while ($this->getSapi()->write($Stream->read(4096)));
 	}
 
+	/**
+	 * @param array $headers
+	 *
+	 * @return \Iterator
+	 */
 	protected function iterateHeaders(array $headers): Iterator {
 		$Iterator = new RecursiveArrayIterator($headers);
 

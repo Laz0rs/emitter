@@ -10,7 +10,9 @@ use SplFileObject;
 class SapiService extends AbstractConstructOnce implements SapiInterface {
 
 	private ReflectionFunction $HeaderFn;
+
 	private SplFileObject $OutputFile;
+
 	private ReflectionFunction $SentFn;
 
 	public function __construct() {
@@ -33,26 +35,35 @@ class SapiService extends AbstractConstructOnce implements SapiInterface {
 		$this->getHeaderFunction()->invokeArgs(
 			array_merge(
 				[$header, $replace],
-				is_int($response_code) ? [$response_code] : []
-			)
+				is_int($response_code) ? [$response_code] : [],
+			),
 		);
 	}
 
 	public function write(string $str): ?int {
-		/** @var bool|int $ret */
+		/** @var int|bool $ret */
 		$ret = $this->getOutputFile()->fwrite($str);
 
 		return !is_bool($ret) ? $ret : null;
 	}
 
+	/**
+	 * @return \ReflectionFunction
+	 */
 	protected function getHeaderFunction(): ReflectionFunction {
 		return $this->HeaderFn;
 	}
 
+	/**
+	 * @return \SplFileObject
+	 */
 	protected function getOutputFile(): SplFileObject {
 		return $this->OutputFile;
 	}
 
+	/**
+	 * @return \ReflectionFunction
+	 */
 	protected function getSentFunction(): ReflectionFunction {
 		return $this->SentFn;
 	}
