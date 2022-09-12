@@ -6,6 +6,7 @@ use Laz0r\Emitter\Exception\SapiException;
 use Laz0r\Util\AbstractConstructOnce;
 use ReflectionFunction;
 use SplFileObject;
+use function array_merge;
 
 class SapiService extends AbstractConstructOnce implements SapiInterface {
 
