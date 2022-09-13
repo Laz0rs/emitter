@@ -165,7 +165,7 @@ class SapiServiceTest extends TestCase {
 		$Mock->expects($this->once())
 			->method("fwrite")
 			->with($this->identicalTo("wut"))
-			->will($this->returnValue(true));
+			->will($this->returnValue(PHP_VERSION_ID < 80100));
 		$Sut->expects($this->once())
 			->method("getOutputFile")
 			->will($this->returnValue($Mock));
