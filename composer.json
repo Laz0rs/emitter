@@ -27,7 +27,7 @@
 	"repositories": [
 		{
 			"type": "vcs",
-			"url": "https://github.com/laz0rs/emitter"
+			"url": "https://github.com/Laz0rs/emitter"
 		}
 	],
 	"require": {
